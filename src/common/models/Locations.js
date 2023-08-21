@@ -1,4 +1,4 @@
-export default class Location{
+export default class Locations {
     constructor(startCity, startCountry, endCity, endCountry, dateTravelled) {
 
         this.startCity = startCity

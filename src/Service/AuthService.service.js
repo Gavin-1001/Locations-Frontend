@@ -1,7 +1,7 @@
 import {BASE_API_URL} from "../api/BaseUrl";
 import axios from "axios";
 
-const BASE_URL = BASE_API_URL + "/api/auth";
+const BASE_URL = BASE_API_URL + "/api/user";
 
 class AuthService{
 
@@ -10,7 +10,7 @@ class AuthService{
     }
 
     register(user){
-        return axios.post(BASE_URL + '/register', user);
+        return axios.post(BASE_URL + '/signup', user);
     }
 
 }

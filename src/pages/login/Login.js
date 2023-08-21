@@ -100,7 +100,7 @@ const Login = () => {
                     <button className={"btn btn-primary w-100 mt-3"}>Sign in</button>
                 </form>
 
-                <Link to={"/register"} className={"btn btn-link"} style={{color:"darkgray"}}>Create an account</Link>
+                <Link to={"/signup"} className={"btn btn-link"} style={{color:"darkgray"}}>Create an account</Link>
             </div>
         </div>
     );
