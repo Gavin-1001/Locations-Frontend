@@ -1,10 +1,13 @@
 export default class Locations {
-    constructor(startCity, startCountry, endCity, endCountry, dateTravelled) {
+    constructor(newStartCity, startCountry, startLatitude, startLongitude,endCity, endCoords, endCountry, dateTravelled) {
 
-        this.startCity = startCity
+        this.newStartCity = newStartCity;
         this.startCountry = startCountry;
+        this.startLatitude = startLatitude;
+        this.startLongitude = startLongitude;
         this.endCity = endCity;
         this.endCountry = endCountry;
+        this.endCoords = endCoords;
         this.dateTravelled = dateTravelled;
     }
 }

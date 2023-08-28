@@ -13,11 +13,13 @@ import {AuthGuard} from "./AuthGuard/AuthGuard";
 import Logout from "./pages/Logout/Logout";
 import Location from "./components/Location/Location";
 
+import GeocodingExample from "./components/Map/GeocodingExample";
+
 
 function App() {
     const linksForNavbar = [
         {url: '/signup', text: 'Register'},
-        {url: '/signin', text: 'Signin'}
+        {url: '/signin', text: 'Signin'},
     ];
 
     return (
@@ -29,7 +31,6 @@ function App() {
                 {/*<TestNavbar links={links} />*/}
                 <Navbar links={linksForNavbar}/>
 
-                {/* Rest of your application */}
             </div>
 
             {/*<Navbar title="NavBar" content=""*/}
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/signin" element={<Login/>}/>
                     <Route path="/signup" element={<Register/>}/>
+                    <Route path="/map" element={<GeocodingExample />}/>
 
                     <Route
                         path="/dashboard"
@@ -57,6 +59,17 @@ function App() {
                             </AuthGuard>
                         }
                     />
+
+                    <Route
+                        path="/home"
+                        element={
+                            <AuthGuard>
+                                <Dashboard />
+                            </AuthGuard>
+                        }
+                    />
+
+
 
 
                     {/*<Route path="/jobListings" element={<AuthGuard><JobListings/></AuthGuard>}/>*/}
