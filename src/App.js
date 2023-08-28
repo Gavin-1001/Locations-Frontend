@@ -13,7 +13,6 @@ import {AuthGuard} from "./AuthGuard/AuthGuard";
 import Logout from "./pages/Logout/Logout";
 import Location from "./components/Location/Location";
 
-import GeocodingExample from "./components/Map/GeocodingExample";
 
 
 function App() {
@@ -40,7 +39,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/signin" element={<Login/>}/>
                     <Route path="/signup" element={<Register/>}/>
-                    <Route path="/map" element={<GeocodingExample />}/>
+
 
                     <Route
                         path="/dashboard"

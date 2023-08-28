@@ -34,7 +34,7 @@ const Dashboard = () => {
                             <tr key={item.id}>
                                 <th scope="row">{index + 1}</th>
                                 <td>{item.dateTravelled}</td>
-                                <td>{item.startCity}</td>
+                                <td>{item.newStartCity}</td>
                                 <td>{item.startCountry}</td>
                                 <td>{item.endCity}</td>
                                 <td>{item.endCountry}</td>

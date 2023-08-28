@@ -22,8 +22,8 @@ const Location = () => {
     const [formData, setFormData] = useState({
         newStartCity: '',
         startCountry: '',
-        latitude: '',
-        longitude: '',
+        startCityLat: '',
+        startCityLong: '',
         endCity: '',
         endCountry: '',
         dateTravelled: '',
@@ -39,6 +39,8 @@ const Location = () => {
 
     const handleLocationChange = (event) => {
         setNewStartCity(event.target.value);
+        console.log(event.target.value);
+        formData.newStartCity = event.target.value;
     };
 
 
@@ -54,11 +56,15 @@ const Location = () => {
 
             if (response.data.results.length > 0) {
                 const {lat, lng} = response.data.results[0].geometry.location;
-                console.log({lat, lng})
+                console.log(newStartCity)
+                setNewStartCity(newStartCity)
                 setStartCoords({lat, lng});
-                console.log("lat long" + lat, lng)
+                console.log("lat long " + lat, lng)
                 setLatitude(lat);
                 setLongitude(lng)
+
+                formData.startCityLat = lat;
+                formData.startCityLong = lng;
 
             } else {
                 setLatitude('');
@@ -71,7 +77,6 @@ const Location = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("1")
         setSubmitted(true);
         // if (!currentUser.id) {
         //     return <Navigate to={{pathname: '/login'}}/>;
@@ -112,6 +117,7 @@ const Location = () => {
             endCoords: '',
             dateTravelled: ''
         });
+        console.log("THIS IS" + newStartCity)
     }
     return (
         <div className="container">
@@ -150,7 +156,7 @@ const Location = () => {
                 </div>
                 <button type="button" onClick={getLatLong} className="btn btn-primary ">Get Lat/Long</button>
                 <input type={"text"}
-                       value={latitude}
+                       value={formData.startCityLat}
                        className="location-form-input"
                        readOnly/>
 
