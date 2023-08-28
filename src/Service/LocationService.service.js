@@ -1,8 +1,9 @@
 import {BASE_API_URL} from "../api/BaseUrl";
 import axios from "axios";
 
+
 const BASE_URL = BASE_API_URL + "/api/locations/";
-const API_KEY = `AIzaSyAguiylf_Y_iBBPafpUxiRWbtsdq8kDh6c`
+const API_KEY = process.env["GOOGLE_MAPS_API_KEY"]
 
 class LocationService{
 
