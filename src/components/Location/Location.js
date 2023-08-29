@@ -16,6 +16,7 @@ const Location = () => {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [newStartCity, setNewStartCity] = useState(''); // 'Milan'
+    const [newEndCity, setNewEndCity] = useState(''); // Milan
     const [startCoords, setStartCoords] = useState()
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
@@ -24,7 +25,9 @@ const Location = () => {
         startCountry: '',
         startCityLat: '',
         startCityLong: '',
-        endCity: '',
+        newEndCity: '',
+        endCityLat: '',
+        endCityLong: '',
         endCountry: '',
         dateTravelled: '',
         //latLong: {latitude, longitude}
@@ -39,12 +42,49 @@ const Location = () => {
 
     const handleLocationChange = (event) => {
         setNewStartCity(event.target.value);
-        console.log(event.target.value);
+        //setNewEndCity(event.target.value);
         formData.newStartCity = event.target.value;
+        // formData.newEndCity = event.target.value;
+        //console.log(formData.newStartCity);
     };
 
+    const handleLocationChangeEndCity = (event) => {
+        setNewEndCity(event.target.value);
+        formData.newEndCity = event.target.value;
+    }
 
-    const getLatLong = async () => {
+    const getEndCityLatLong = async () => {
+        try {
+            const response = await axios.get(
+                `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+                    newEndCity
+                )}&key=${API_KEY}`
+            );
+            if (response.data.results.length > 0) {
+                const {lat, lng} = response.data.results[0].geometry.location;
+                console.log(newEndCity+ " before hand")
+                // setNewStartCity(newStartCity)
+                setNewEndCity(newEndCity);
+                console.log(newEndCity)
+                // setStartCoords({lat, lng});
+                console.log("lat long " + lat, lng)
+                // setLatitude(lat);
+                // setLongitude(lng)
+                formData.endCityLat = lat;
+                formData.endCityLong = lng;
+                console.log()
+
+            } else {
+                setLatitude('');
+                setLongitude('');
+            }
+        } catch (error) {
+            console.error('Error fetching geocoding data:', error);
+        }
+    }
+
+
+    const getStartCityLatLong = async () => {
 
         try {
             // const startCity = formData.newStartCity
@@ -112,7 +152,7 @@ const Location = () => {
             startCountry: '',
             startLatitude: '',
             startLongitude: '',
-            endCity: '',
+            newEndCity: '',
             endCountry: '',
             endCoords: '',
             dateTravelled: ''
@@ -121,27 +161,8 @@ const Location = () => {
     }
     return (
         <div className="container">
-            {/*<div>*/}
-            {/*    <h2>Get Latitude and Longitude</h2>*/}
-            {/*    <div>*/}
-            {/*        <input*/}
-            {/*            type="text"*/}
-            {/*            placeholder="Enter a location"*/}
-            {/*            value={startCity}*/}
-            {/*            onChange={handleLocationChange}*/}
-            {/*        />*/}
-            {/*        <button onClick={getLatLong}>Get LatLong</button>*/}
-            {/*    </div>*/}
-            {/*    {latitude && longitude && (*/}
-            {/*        <div>*/}
-            {/*            Latitude: {latitude}*/}
-            {/*            <br />*/}
-            {/*            Longitude: {longitude}*/}
-            {/*        </div>*/}
-            {/*    )}*/}
-            {/*</div>*/}
             <form onSubmit={handleSubmit} className={"form-container"}>
-                <div>
+                <div className={"input-container"}>
                     <label htmlFor="newStartCity" className="location-form-label"/>
                     <input type="text"
                            placeholder="enter start city"
@@ -152,9 +173,11 @@ const Location = () => {
                            onChange={handleLocationChange}
                            className="location-form-input"
                     />
+                    <button type="button" onClick={getStartCityLatLong} className="btn btn-primary ">Get Lat/Long
+                    </button>
                     <div className="invalid-feedback">{location.newStartCity} cannot be empty</div>
                 </div>
-                <button type="button" onClick={getLatLong} className="btn btn-primary ">Get Lat/Long</button>
+
                 <input type={"text"}
                        value={formData.startCityLat}
                        className="location-form-input"
@@ -164,11 +187,6 @@ const Location = () => {
                        value={longitude}
                        className="location-form-input"
                        readOnly/>
-
-                <div>
-
-                </div>
-
 
                 <div>
                     <label htmlFor="startCountry" className="location-form-label"/>
@@ -183,18 +201,30 @@ const Location = () => {
                     <div className="invalid-feedback">{location.startCountry} cannot be empty</div>
                 </div>
 
-                <div>
+                <div className={"input-container"}>
                     <label htmlFor="endCity" className="location-form-label"/>
                     <input type="text"
                            placeholder="enter end city"
-                           value={formData.endCity}
+                           value={newEndCity}
                            name={"endCity"}
                            required
-                           onChange={handleChange}
+                           //onChange={handleChange}
+                           onChange={handleLocationChangeEndCity}
                            className="location-form-input"
                     />
-                    <div className="invalid-feedback">{location.endCity} cannot be empty</div>
+                    <button type="button" onClick={getEndCityLatLong} className="btn btn-primary button-input-field">Get Lat/Long</button>
+                    <div className="invalid-feedback">{location.newEndCity} cannot be empty</div>
                 </div>
+
+                <input type={"text"}
+                       value={formData.endCityLat}
+                       className="location-form-input"
+                       readOnly/>
+
+                <input type={"text"}
+                       value={formData.endCityLong}
+                       className="location-form-input"
+                       readOnly/>
 
                 <div>
                     <label htmlFor="endCountry" className="location-form-label"/>

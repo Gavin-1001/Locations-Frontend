@@ -38,7 +38,7 @@ const Navbar = ({links}) => {
 
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><NavLink to="/profile" className="dropdown-item">Profile</NavLink></li>
-                        <li><NavLink to="/location" className="dropdown-item">Location</NavLink></li>
+                        <li><NavLink to="/location" className="dropdown-item">Trips</NavLink></li>
                         <li><NavLink to="/home" className="dropdown-item">Home</NavLink></li>
                         <li><NavLink to="/map" className="dropdown-item">Map</NavLink></li>
                         <li><NavLink to="/logout" className="dropdown-item" onClick={() => logout()}>Logout</NavLink>

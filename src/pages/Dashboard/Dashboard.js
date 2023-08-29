@@ -15,7 +15,7 @@ const Dashboard = () => {
         <div className="container">
             <div className="card-body">
                 {locationList.length === 0 ? (
-                    <p>No locations available.</p>
+                    <p>No trips have been created.</p>
                 ) : (
                     <table className="table table-striped">
                         <thead>
@@ -36,7 +36,7 @@ const Dashboard = () => {
                                 <td>{item.dateTravelled}</td>
                                 <td>{item.newStartCity}</td>
                                 <td>{item.startCountry}</td>
-                                <td>{item.endCity}</td>
+                                <td>{item.newEndCity}</td>
                                 <td>{item.endCountry}</td>
 
                             </tr>
